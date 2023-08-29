@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('candidato', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->date('dtNasc');
+            $table->string('cpf');
+            $table->string('telefone');
+            $table->string('email');
+            $table->string('sexo',1);
             $table->timestamps();
         });
     }
