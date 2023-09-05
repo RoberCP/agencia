@@ -6,57 +6,52 @@ use Illuminate\Http\Request;
 
 class CidadeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Mostra uma visão geral dos registros
     public function index()
     {
-        //
+        // Obtém todas as cidade do banco de dados
+        $cidades = Cidade::all();
+        return view('cidades.index', compact('cidades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Formulário para criar um novo registro
     public function create()
     {
-        //
+        return view('cidades.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
-        //
+        // Cria uma nova instância do model 'Cidade' com os dados fornecidos no request
+        $cidade = new Cidade([
+            'nome' => $request->input('nome'),
+            'uf' => $request->input('uf')
+        ]);
+        // Salva no banco de dados
+        $cidade->save();
+        return redirect()->route('cidades.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Exibe um registro específico
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Formulário de edição de um registro
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Recebe os dados do formulário de edição e atualiza no banco de dados
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Exclui um registro
     public function destroy(string $id)
     {
         //
