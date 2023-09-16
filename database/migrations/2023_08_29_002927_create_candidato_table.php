@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('candidato', function (Blueprint $table) {
             $table->id();
+            $table->string('cpf');
+            $table->string('nome');
+            $table->date('dataNasc');
+            $table->string('telefone');
+            $table->string('genero');
+            $table->unsignedBigInteger('cidade_id');
             $table->timestamps();
+
+            $table->foreign('cidade_id')->references('id')->on('cidade');
         });
     }
 

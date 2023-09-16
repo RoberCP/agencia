@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('vaga', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('descricao');
+            $table->string('tipoContratacao');
+            $table->unsignedBigInteger('empresa_id');
+            $table->unsignedBigInteger('cidade_id');
             $table->timestamps();
+
+            $table->foreign('empresa_id')->references('id')->on('empresa');
+            $table->foreign('cidade_id')->references('id')->on('cidade');
         });
     }
 

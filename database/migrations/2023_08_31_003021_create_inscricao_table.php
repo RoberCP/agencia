@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('inscricao', function (Blueprint $table) {
             $table->id();
+            $table->date('dataInscricao');
+            $table->string('statusForms');
+            $table->string('statusInscricao');
+            $table->unsignedBigInteger('candidato_id');
+            $table->unsignedBigInteger('empresa_id');
+            $table->unsignedBigInteger('cidade_id');
             $table->timestamps();
+
+            $table->foreign('candidato_id')->references('id')->on('candidato');
+            $table->foreign('empresa_id')->references('id')->on('empresa');
+            $table->foreign('cidade_id')->references('id')->on('cidade');
         });
     }
 
