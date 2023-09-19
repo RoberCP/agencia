@@ -10,3 +10,4 @@ class Candidato extends Model
     protected $table = 'candidato';
     protected $fillable = ['nome', 'dataNasc', 'telefone', 'genero', 'cidade_id'];
 }
+// A linha $filltable não será usada por enquanto.
