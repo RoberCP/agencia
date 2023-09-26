@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CidadeController;
+use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\InscricaoController;
+use App\Http\Controllers\VagaController;
 use Illuminate\Support\Facades\Route;
 
 /*
