@@ -28,4 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('candidatos', CandidatoController::class);
+Route::resource('cidades', CidadeController::class);
+Route::resource('empresas', EmpresaController::class);
+Route::resource('vagas', VagaController::class);
+Route::resource('inscricoes', InscricaoController::class);
+
 require __DIR__.'/auth.php';

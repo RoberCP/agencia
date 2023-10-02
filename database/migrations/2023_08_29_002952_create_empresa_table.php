@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('empresa', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('razao');
-            $table->string('cnpj');
-            $table->string('email');
             $table->timestamps();
+
+            $table->foreign('cidade_id')->references('id')->on('cidade');
         });
     }
 
