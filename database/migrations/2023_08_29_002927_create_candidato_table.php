@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('candidato', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
+            $table->string('nome');
+            $table->date('dtNasc');
+            $table->string('cpf');
+            $table->string('telefone');
+            $table->string('email');
+            $table->string('sexo',1);
+=======
             $table->string('cpf');
             $table->string('nome');
             $table->date('dataNasc');
             $table->string('telefone');
             $table->string('genero');
             $table->unsignedBigInteger('cidade_id');
+>>>>>>> migrations
             $table->timestamps();
 
             $table->foreign('cidade_id')->references('id')->on('cidade');

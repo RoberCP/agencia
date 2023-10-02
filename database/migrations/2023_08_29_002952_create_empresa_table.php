@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('empresa', function (Blueprint $table) {
             $table->id();
-            $table->string('cnpj');
-            $table->string('nome');
-            $table->unsignedBigInteger('cidade_id');
             $table->timestamps();
 
             $table->foreign('cidade_id')->references('id')->on('cidade');
