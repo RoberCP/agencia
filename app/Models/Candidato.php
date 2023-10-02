@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Candidato extends Model
 {
     protected $table = 'candidato';
-    protected $fillable = ['nome', 'dataNasc', 'telefone', 'genero', 'cidade_id'];
+    //protected $fillable = ['nome', 'dataNasc', 'telefone', 'genero'];
 }
-// A linha $filltable não será usada por enquanto.

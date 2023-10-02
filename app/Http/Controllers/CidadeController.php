@@ -23,6 +23,8 @@ class CidadeController extends Controller
     // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
+        $cidades = Cidade::all();
+        
         // Cria uma nova instância do model 'Cidade' com os dados fornecidos no request
         $cidade = new Cidade([
             'nome' => $request->input('nome'),

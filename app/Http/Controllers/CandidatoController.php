@@ -6,33 +6,36 @@ use Illuminate\Http\Request;
 
 class CandidatoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Mostra uma visão geral dos registros
     public function index()
     {
-        //
+        // Obtém todos os candidatos do banco de dados
+        $candidatos = Candidato::all();
+        return view('candidatos.index', compact('candidatos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Formulário para criar um novo registro
     public function create()
     {
-        //
+        return view('candidatos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
-        //
+        // Cria uma nova instância do model 'Candidato' com os dados fornecidos no request
+        $candidato = new Candidato([
+            'nome' => $request->input('nome'),
+            'dataNasc' => $request->input('dataNasc'),
+            'telefone' => $request->input('telefone'),
+            'genero' => $request->input('genero'),
+        ]);
+        // Salva no banco de dados
+        $candidato->save();
+        return redirect()->route('candidatos.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
