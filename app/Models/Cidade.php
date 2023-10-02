@@ -10,5 +10,5 @@ class Cidade extends Model
     // Define o nome da tabela a qual a model está associada
     protected $table = 'cidade';
     // Define quais colunas da tabela poderão ser preenchidas no create
-    // protected $fillable = ['id', 'nome', 'uf'];
+    protected $fillable = ['id', 'nome', 'uf'];
 }
