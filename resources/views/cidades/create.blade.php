@@ -23,9 +23,16 @@
                 margin-bottom: 15px;
             }
 
+            title, h1 {
+                display: block;
+                font-weight: bold;
+                color: #fff;  
+            }
+
             label {
                 display: block;
                 font-weight: bold;
+                color: #fff;
             }
 
             input[type="text"],
