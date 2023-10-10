@@ -23,8 +23,7 @@ return new class extends Migration
 
             $table->foreign('candidato_id')->references('id')->on('candidato');
             $table->foreign('empresa_id')->references('id')->on('empresa');
-            $table->foreign('cidade_id')->references('id')->on('cidade');
-        });
+            $table->foreign('cidade_id')->references('id')->on('cidade');        });
     }
 
     /**

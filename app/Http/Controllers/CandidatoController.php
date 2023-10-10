@@ -29,7 +29,7 @@ class CandidatoController extends Controller
         // Cria uma nova instância do model 'Candidato' com os dados fornecidos no request
         $candidato = new Candidato([
             'nome' => $request->input('nome'),
-            'dtNasc' => $request->input('dtNasc'),
+            'dataNasc' => $request->input('dataNasc'),
             'telefone' => $request->input('telefone'),
             'genero' => $request->input('genero'),
         ]);
@@ -63,7 +63,7 @@ class CandidatoController extends Controller
         // Atualiza os campos da Candidato com os dados fornecidos no request
         $candidato->id = $request->input('id');
         $candidato->nome = $request->input('nome');
-        $candidato-> dtNasc = $request->input('dtNasc');
+        $candidato-> dataNasc = $request->input('dataNasc');
         $candidato-> telefone = $request->input('telefone');
         $candidato->genero = $request->input('genero');
         // Salva as alterações
