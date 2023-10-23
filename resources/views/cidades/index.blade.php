@@ -3,7 +3,7 @@
     <div class="container">
         {{-- <h1>Listagem de Cidades</h1> --}}
         <br>
-        <a href="{{ route('autores.create') }}" class="btn btn-primary">Nova Cidade</a>
+        <a href="{{ route('cidades.create') }}" class="btn btn-primary">Nova Cidade</a>
         <table class="table">
             <thead>
                 <tr>

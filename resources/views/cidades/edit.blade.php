@@ -66,7 +66,7 @@
                     <input type="text" name="id" value="{{ $cidade->id }}">
                 </div>
                 <div class="form-group">
-                    <label for="nome">Data de Nascimento:</label>
+                    <label for="nome">Nome:</label>
                     <input type="text" name="nome" value="{{ $cidade->nome }}">
                 </div>
                 <div class="form-group">
