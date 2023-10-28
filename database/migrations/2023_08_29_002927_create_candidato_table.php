@@ -17,13 +17,12 @@ return new class extends Migration
             $table->string('nome');
             $table->date('dataNasc');
             $table->string('telefone');
-            $table->string('email');
-            $table->string('senha');
             $table->string('genero');
             $table->unsignedBigInteger('cidade_id');
             $table->timestamps();
 
-            $table->foreign('cidade_id')->references('id')->on('cidade');        });
+            $table->foreign('cidade_id')->references('id')->on('cidade');
+        });
     }
 
     /**
