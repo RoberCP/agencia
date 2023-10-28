@@ -18,6 +18,10 @@
             margin-bottom: 15px;
         }
 
+        h1 {
+            color: #fff;
+        }
+
         label {
             display: block;
             font-weight: bold;
@@ -58,7 +62,7 @@
     <body>
         <div class="container">
             <h1>Editar Cidade</h1>
-            <form action="{{ route('autores.update', $cidade->id) }}" method="POST">
+            <form action="{{ route('cidades.update', $cidade->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -74,7 +78,7 @@
                     <input type="text" name="uf" value="{{ $cidade->uf }}">
                 </div>
                 <button type="submit" class="btn btn-success">Salvar Alterações</button>
-                <a href="{{ route('autores.index') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('cidades.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </body>
