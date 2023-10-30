@@ -23,7 +23,7 @@
                 margin-bottom: 15px;
             }
 
-            title, h1 {
+            h1 {
                 display: block;
                 font-weight: bold;
                 color: #fff;  
