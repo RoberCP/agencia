@@ -70,12 +70,16 @@
                     <input type="text" name="id" value="{{ $empresa->id }}">
                 </div>
                 <div class="form-group">
+                    <label for="uf">CNPJ:</label>
+                    <input type="text" name="cnpj" value="{{ $empresa->cnpj }}">
+                </div>
+                <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" value="{{ $empresa->nome }}">
                 </div>
                 <div class="form-group">
-                    <label for="uf">UF:</label>
-                    <input type="text" name="uf" value="{{ $empresa->uf }}">
+                    <label for="nome">Cidade:</label>
+                    <input type="text" name="cidade" value="{{ $empresa->cidade }}">
                 </div>
                 <button type="submit" class="btn btn-success">Salvar Alterações</button>
                 <a href="{{ route('empresas.index') }}" class="btn btn-secondary">Cancelar</a>

@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome" required>
+                    <input type="text" name="nome">
                 </div>
                 <div class="form-group">
                     <label for="uf">UF:</label>
