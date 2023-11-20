@@ -69,15 +69,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="id">Id:</label>
-                    <input type="text" name="id">
+                    <input type="text" name="id" required>
                 </div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome">
+                    <input type="text" name="nome" required>
                 </div>
                 <div class="form-group">
                     <label for="uf">UF:</label>
-                    <input type="text" name="uf">
+                    <input type="text" name="uf" required>
                 </div>
                 <!-- Insere div timestamp?-->
                 <button type="submit" class="btn btn-success">Salvar</button>

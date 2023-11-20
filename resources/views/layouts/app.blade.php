@@ -10,9 +10,11 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -25,6 +27,24 @@
                         {{ $header }}
                     </div>
                 </header>
+            @endif
+
+            @if ($errors->any())
+                <div role="alert">
+                    @foreach ($errors->all() as $error)
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-2">
+                            <strong class="font-bold">Erro!</strong>
+                            <span class="block sm:inline">{{ $error }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Sucesso!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
             @endif
 
             <!-- Page Content -->

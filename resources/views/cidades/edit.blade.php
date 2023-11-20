@@ -20,6 +20,7 @@
 
         h1 {
             color: #fff;
+            font-weight: bold;
         }
 
         label {
@@ -65,10 +66,7 @@
             <form action="{{ route('cidades.update', $cidade->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="nome">Id:</label>
-                    <input type="text" name="id" value="{{ $cidade->id }}">
-                </div>
+              
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" value="{{ $cidade->nome }}">

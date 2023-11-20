@@ -24,16 +24,20 @@ class CidadeController extends Controller
     // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
-        $cidades = Cidade::all();
-        
-        // Cria uma nova instância do model 'Cidade' com os dados fornecidos no request
-        $cidade = new Cidade([
-            'nome' => $request->input('nome'),
-            'uf' => $request->input('uf')
-        ]);
-        // Salva no banco de dados
-        $cidade->save();
-        return redirect()->route('cidades.index');
+        $messages = [
+            'nome.required' => 'É necessário preencher o campo nome.',
+            'uf.required' => 'É necessário preencher o campo UF.'
+        ];
+
+        $request->validate([
+            'nome' => 'required|string|max:100',
+            'uf' => 'required|string|max:2',
+            
+        ], $messages);
+
+        Cidade::create($request->all());
+
+        return redirect()->route('cidades.index')->with('success', 'Cidade criada com sucesso!');
     }
 
     // Exibe um registro específico
@@ -58,23 +62,19 @@ class CidadeController extends Controller
     public function update(Request $request, string $id)
     {
         $cidade = Cidade::findOrFail($id);
-        // Atualiza os campos da cidade com os dados fornecidos no request
-        $cidade->id = $request->input('id');
-        $cidade->nome = $request->input('nome');
-        $cidade->uf = $request->input('uf');
-        // Salva as alterações
-        $cidade->save();
+        // Atualize a cidade com os dados do request aqui
+        $cidade->update($request->all());
         // Redireciona para a rota 'cidades.index' após salvar
-        return redirect()->route('cidades.index');
+        return redirect()->route('cidades.index')->with('success', 'Cidade atualizada com sucesso!');
     }
 
     // Exclui um registro
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $cidade = Cidade::findOrFail($id);
         // Exclui a cidade do banco de dados
         $cidade->delete();
         // Redireciona para a rota 'cidades.index' após salvar
-        return redirect()->route('cidades.index');
+        return redirect()->route('cidades.index')->with('success', 'Cidade excluída com sucesso!');
     }
 }
