@@ -24,18 +24,25 @@ class CandidatoController extends Controller
     // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
-        $candidatos = Candidato::all();
+        $messages = [
+            'cpf.required' => 'É necessário preencher o campo CPF.',
+            'nome.required' => 'É necessário preencher o campo nome.',
+            'dataNasc.required' => 'É necessário preencher o campo dataNasc.',
+            'telefone.required' => 'É necessário preencher o campo telefone.',
+            'cidade.required' => 'É necessário preencher o campo cidade.',
+        ];
 
-        // Cria uma nova instância do model 'Candidato' com os dados fornecidos no request
-        $candidato = new Candidato([
-            'nome' => $request->input('nome'),
-            'dataNasc' => $request->input('dataNasc'),
-            'telefone' => $request->input('telefone'),
-            'genero' => $request->input('genero'),
-        ]);
-        // Salva no banco de dados
-        $candidato->save();
-        return redirect()->route('candidatos.index');
+        $request->validate([
+            'cpf' => 'required|string|11',
+            'nome' => 'required|string|max:100',
+            'dataNasc' => 'required|date', 
+            'telefone' => 'required|string|9',
+            'cidade_id' => 'required|exists:cidade, id'
+        ], $messages);
+
+        Candidato::create($request->all());
+
+        return redirect()->route('candidatos.index')->with('success', 'Candidato cadastrado com sucesso!');
     }
 
     // Exibe um registro específico
@@ -59,17 +66,27 @@ class CandidatoController extends Controller
     // Recebe os dados do formulário de edição e atualiza no banco de dados
     public function update(Request $request, string $id)
     {
+        $messages = [
+            'cpf.required' => 'É necessário preencher o campo CPF.',
+            'nome.required' => 'É necessário preencher o campo nome.',
+            'dataNasc.required' => 'É necessário preencher o campo dataNasc.',
+            'telefone.required' => 'É necessário preencher o campo telefone.',
+            'cidade_id.required' => 'É necessário preencher o campo cidade.',
+        ];
+
+        $request->validate([
+            'cpf' => 'required|string|11',
+            'nome' => 'required|string|max:100',
+            'dataNasc' => 'required|', // VER COMO FICA
+            'telefone' => 'required|string|9',
+            'cidade.required' => 'required|' // VER COMO FICA
+        ], $messages);
+
         $candidato = Candidato::findOrFail($id);
-        // Atualiza os campos da Candidato com os dados fornecidos no request
-        $candidato->id = $request->input('id');
-        $candidato->nome = $request->input('nome');
-        $candidato-> dataNasc = $request->input('dataNasc');
-        $candidato-> telefone = $request->input('telefone');
-        $candidato->genero = $request->input('genero');
-        // Salva as alterações
-        $candidato->save();
+        // Atualize a cidade com os dados do request aqui
+        $candidato->update($request->all());
         // Redireciona para a rota 'Candidatos.index' após salvar
-        return redirect()->route('candidatos.index');
+        return redirect()->route('candidatos.index')->with('success', 'Candidato atualizado com sucesso!');
     }
 
     // Exclui um registro

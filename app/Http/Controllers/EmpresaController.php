@@ -24,16 +24,19 @@ class EmpresaController extends Controller
     // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
-        $empresas = Empresa::all();
+        $messages = [
+            'nome.required' => 'É necessário preencher o campo nome.',
+            'cidade.required' => 'É necessário preencher o campo cidade.'
+        ];
+
+        $request->validate([
+            'nome' => 'required|string|max:100',
+            'cidade' => 'required|exists:cidade,id' , // VER COMO FICA
+        ], $messages);
+
+        Empresa::create($request->all());
         
-        // Cria uma nova instância do model 'empresa' com os dados fornecidos no request
-        $empresa = new Empresa([
-            'nome' => $request->input('nome'),
-            'uf' => $request->input('uf')
-        ]);
-        // Salva no banco de dados
-        $empresa->save();
-        return redirect()->route('empresas.index');
+        return redirect()->route('empresas.index')->with('success', 'Empresa cadastrada com sucesso!');
     }
 
     // Exibe um registro específico
@@ -57,15 +60,20 @@ class EmpresaController extends Controller
     // Recebe os dados do formulário de edição e atualiza no banco de dados
     public function update(Request $request, string $id)
     {
-        $empresa = Empresa::findOrFail($id);
-        // Atualiza os campos da empresa com os dados fornecidos no request
-        $empresa->id = $request->input('id');
-        $empresa->nome = $request->input('nome');
-        $empresa->uf = $request->input('uf');
-        // Salva as alterações
-        $empresa->save();
+        $messages = [
+            'nome.required' => 'É necessário preencher o campo nome.',
+            'cidade.required' => 'É necessário preencher o campo cidade.'
+        ];
+
+        $request->validate([
+            'nome' => 'required|string|max:100',
+            'cidade' => 'required|exists:cidade,id', 
+        ], $messages);
+
+        Empresa::update($request->all());
+
         // Redireciona para a rota 'empresas.index' após salvar
-        return redirect()->route('empresas.index');
+        return redirect()->route('empresas.index')->with('success', 'Empresa atualizada com sucesso!');
     }
 
     // Exclui um registro

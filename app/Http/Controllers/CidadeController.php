@@ -25,6 +25,7 @@ class CidadeController extends Controller
     public function store(Request $request)
     {
         $messages = [
+        
             'nome.required' => 'É necessário preencher o campo nome.',
             'uf.required' => 'É necessário preencher o campo UF.'
         ];
@@ -54,6 +55,7 @@ class CidadeController extends Controller
     {
         // Encontra uma cidade no banco de dados com o ID fornecido
         $cidade = Cidade::findOrFail($id);
+
         // Retorna a view 'cidades.edit' e passa a cidade como parâmetro
         return view('cidades.edit', compact('cidade'));
     }
@@ -61,6 +63,17 @@ class CidadeController extends Controller
     // Recebe os dados do formulário de edição e atualiza no banco de dados
     public function update(Request $request, string $id)
     {
+        $messages = [
+            'nome.required' => 'É necessário preencher o campo nome.',
+            'uf.required' => 'É necessário preencher o campo UF.'
+        ];
+    
+        $request->validate([
+            'nome' => 'required|string|max:100',
+            'uf' => 'required|string|max:2',
+            
+        ], $messages);
+
         $cidade = Cidade::findOrFail($id);
         // Atualize a cidade com os dados do request aqui
         $cidade->update($request->all());
