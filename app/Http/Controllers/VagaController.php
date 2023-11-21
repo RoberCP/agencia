@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vaga;
+use App\Models\Empresa;
+use App\Models\Cidade;
 
 class VagaController extends Controller
 {
@@ -17,7 +19,9 @@ class VagaController extends Controller
 
     public function create()
     {
-        return view('vagas.create');
+        $empresas = Empresa::all();
+        $cidades = Cidade::all();
+        return view('vagas.create', compact('empresas', 'cidades'));
     }
 
     public function store(Request $request)
@@ -55,9 +59,12 @@ class VagaController extends Controller
     public function edit(string $id)
     {
         // Encontra uma vaga no banco de dados com o ID fornecido
-        $empresa = Vaga::findOrFail($id);
+        $vagas = Vaga::findOrFail($id);
+        $empresas = Empresa::all();
+        $cidades = Cidade::all();
+
         // Retorna a view 'vagas.edit' e passa a empresa como parâmetro
-        return view('vagas.edit', compact('vagas'));
+        return view('vagas.edit', compact('vagas', 'empresas', 'cidades'));
         
     }
 
@@ -68,7 +75,7 @@ class VagaController extends Controller
             'descricao.required' => 'É necessário preencher o campo descrição.',
             'tipoContratacao.required' => 'É necessário preencher o campo tipo de contratação.',
             'empresa.required' => 'É necessário preencher o campo empresa.',
-            'cidade.required' => 'É necessário preencher o campo cidade.',
+            'cidade_id.required' => 'É necessário preencher o campo cidade.',
         ];
 
         $request->validate([
@@ -90,6 +97,6 @@ class VagaController extends Controller
         // Exclui a vaga do banco de dados
         $vaga->delete();
         // Redireciona para a rota 'vagas.index' após salvar
-        return redirect()->route('vagas.index');
+        return redirect()->route('vagas.index')->with('success', 'Vaga excluída com sucesso!');
     }
 }

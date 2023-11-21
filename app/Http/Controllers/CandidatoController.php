@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candidato;
+use App\Models\Cidade;
 
 class CandidatoController extends Controller
 {
@@ -18,7 +19,8 @@ class CandidatoController extends Controller
     // Formulário para criar um novo registro
     public function create()
     {
-        return view('candidatos.create');
+        $cidades = Cidade::all();
+        return view('candidatos.create', compact('cidades'));
     }
 
     // Recebe os dados do formulário e salva no banco de dados
@@ -29,15 +31,17 @@ class CandidatoController extends Controller
             'nome.required' => 'É necessário preencher o campo nome.',
             'dataNasc.required' => 'É necessário preencher o campo dataNasc.',
             'telefone.required' => 'É necessário preencher o campo telefone.',
-            'cidade.required' => 'É necessário preencher o campo cidade.',
+            'genero.required' => 'É necessário preencher o campo genêro.',
+            'cidade_id.required' => 'É necessário preencher o campo cidade.',
         ];
 
         $request->validate([
             'cpf' => 'required|string|11',
             'nome' => 'required|string|max:100',
-            'dataNasc' => 'required|date', 
+            'dataNasc' => 'required|date', // VER COMO FICA
             'telefone' => 'required|string|9',
-            'cidade_id' => 'required|exists:cidade, id'
+            'genero' => 'required|in:F,M',
+            'cidade.required' => 'required|exists:cidade,id' // VER COMO FICA
         ], $messages);
 
         Candidato::create($request->all());
@@ -49,18 +53,19 @@ class CandidatoController extends Controller
     public function show(string $id)
     {
         // Encontra uma Candidato no banco de dados com o ID fornecido
-        $candidato = Candidato::findOrFail($id);
+        $candidatos = Candidato::findOrFail($id);
         // Retorna a view 'Candidatos.show' e passa a Candidato como parâmetro
-        return view('candidatos.show', compact('candidato'));
+        return view('candidatos.show', compact('candidatos'));
     }
 
     // Formulário de edição de um registro
     public function edit(string $id)
     {
         // Encontra uma Candidato no banco de dados com o ID fornecido
-        $candidato = Candidato::findOrFail($id);
+        $candidatos = Candidato::findOrFail($id);
+        $cidades = Cidade::all();
         // Retorna a view 'Candidatos.edit' e passa a Candidato como parâmetro
-        return view('candidatos.edit', compact('candidato'));
+        return view('candidatos.edit', compact('candidatos', 'cidades'));
     }
 
     // Recebe os dados do formulário de edição e atualiza no banco de dados
@@ -71,15 +76,17 @@ class CandidatoController extends Controller
             'nome.required' => 'É necessário preencher o campo nome.',
             'dataNasc.required' => 'É necessário preencher o campo dataNasc.',
             'telefone.required' => 'É necessário preencher o campo telefone.',
+            'genero.required' => 'É necessário preencher o campo genêro.',
             'cidade_id.required' => 'É necessário preencher o campo cidade.',
         ];
 
         $request->validate([
             'cpf' => 'required|string|11',
             'nome' => 'required|string|max:100',
-            'dataNasc' => 'required|', // VER COMO FICA
+            'dataNasc' => 'required|date', // VER COMO FICA
             'telefone' => 'required|string|9',
-            'cidade.required' => 'required|' // VER COMO FICA
+            'genero' => 'required|in:F,M',
+            'cidade_id' => 'required|exists:cidade,id' // VER COMO FICA
         ], $messages);
 
         $candidato = Candidato::findOrFail($id);
@@ -96,6 +103,6 @@ class CandidatoController extends Controller
         // Exclui a Candidato do banco de dados
         $candidato->delete();
         // Redireciona para a rota 'Candidatos.index' após salvar
-        return redirect()->route('candidatos.index');
+        return redirect()->route('candidatos.index')->with('success', 'Vaga excluída com sucesso!');
     }
 }

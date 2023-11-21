@@ -22,11 +22,21 @@
             </div>
             <div class="form-group">
                 <label for="empresa_id">Empresa:</label>
-                <input type="text" name="empresa_id">
+                <select class="form-control" name="empresa_id" required>
+                <option value="">Selecione uma empresa</option>
+                    @foreach($empresas as $empresa)
+                        <option value="{{ $empresa->id }}">{{ $empresa->nome }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="cidade_id">Cidade:</label>
-                <input type="text" name="cidade_id">
+                <select class="form-control" name="cidade_id" required>
+                <option value="">Selecione uma cidade</option>
+                    @foreach($cidades as $cidade)
+                        <option value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                    @endforeach
+                </select>
             </div>
             <!-- Insere div timestamp?-->
             <button type="submit" class="btn btn-success">Salvar</button>

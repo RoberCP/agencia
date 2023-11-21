@@ -59,6 +59,10 @@
             .btn-secondary {
                 background-color: #6c757d;
             }
+
+            .genero {
+                color: #fff;
+            }
         </style>
     </head>
 
@@ -70,28 +74,36 @@
                 @csrf
                 <div class="form-group">
                     <label for="cpf">CPF:</label>
-                    <input type="text" name="cpf">
+                    <input type="text" name="cpf" required>
                 </div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome">
+                    <input type="text" name="nome" required>
                 </div>
                 <div class="form-group">
                     <label for="dataNasc">Data de Nascimento:</label>
-                    <input type="date" name="dataNasc">
+                    <input type="date" name="dataNasc" required>
                 </div>
                 <div class="form-group">
                     <label for="telefone">Telefone:</label>
-                    <input type="text" name="telefone">
+                    <input type="text" name="telefone" required>
                 </div>
                 <div class="form-group">
-                    <label for="genero">Gênero:</label>
-                    <input type="text" name="genero">
+                <label for="genero">Gênero:</label>
+                <div>
+                  <input  type="radio" name="genero" value="F" required> <span class="genero">Feminino</span>
+                  <input type="radio" name="genero" value="M" required> <span class="genero">Masculino</span>
+                 </div>
                 </div>
                 <div class="form-group">
-                    <label for="cidade_id">Cidade:</label>
-                    <input type="text" name="cidade_id">
-                </div>
+                <label for="cidade_id">Cidade:</label>
+                <select class="form-control" name="cidade_id" required>
+                <option value="">Selecione uma cidade</option>
+                    @foreach($cidades as $cidade)
+                        <option value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
                 <button type="submit" class="btn btn-success">Salvar</button>
                 <a href="{{ route('candidatos.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>

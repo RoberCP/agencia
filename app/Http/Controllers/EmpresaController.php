@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empresa;
+use App\Models\Cidade;
 
 class EmpresaController extends Controller
 {
@@ -18,20 +19,23 @@ class EmpresaController extends Controller
     // Formulário para criar um novo registro
     public function create()
     {
-        return view('empresas.create');
+        $cidades = Cidade::all();
+        return view('empresas.create', compact('cidades'));
     }
 
     // Recebe os dados do formulário e salva no banco de dados
     public function store(Request $request)
     {
         $messages = [
+            //'cnpj.required' => 'É necessário preencher o campo CNPJ.',
             'nome.required' => 'É necessário preencher o campo nome.',
-            'cidade.required' => 'É necessário preencher o campo cidade.'
+            'cidade_id.required' => 'É necessário preencher o campo cidade.'
         ];
 
         $request->validate([
+            //'cnpj' => 'required|string|max:14',
             'nome' => 'required|string|max:100',
-            'cidade' => 'required|exists:cidade,id' , // VER COMO FICA
+            'cidade_id' => 'required|exists:cidade,id' , 
         ], $messages);
 
         Empresa::create($request->all());
@@ -53,21 +57,24 @@ class EmpresaController extends Controller
     {
         // Encontra uma empresa no banco de dados com o ID fornecido
         $empresa = Empresa::findOrFail($id);
+        $cidades = Cidade::all();
         // Retorna a view 'empresas.edit' e passa a empresa como parâmetro
-        return view('empresas.edit', compact('empresa'));
+        return view('empresas.edit', compact('empresa', 'cidades'));
     }
 
     // Recebe os dados do formulário de edição e atualiza no banco de dados
     public function update(Request $request, string $id)
     {
         $messages = [
+            //'cnpj.required' => 'É necessário preencher o campo CNPJ.',
             'nome.required' => 'É necessário preencher o campo nome.',
             'cidade.required' => 'É necessário preencher o campo cidade.'
         ];
 
         $request->validate([
+            //'cnpj' => 'required|string|max:14',
             'nome' => 'required|string|max:100',
-            'cidade' => 'required|exists:cidade,id', 
+            'cidade' => 'required|exists:cidade,id' , // VER COMO FICA
         ], $messages);
 
         Empresa::update($request->all());

@@ -71,16 +71,17 @@
                 <input type="text" name="id">
             </div>
             <div class="form-group">
-                <label for="cnpj">CNPJ:</label>
-                <input type="text" name="cnpj">
-            </div>
-            <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome">
             </div>
             <div class="form-group">
                 <label for="cidade_id">Cidade:</label>
-                <input type="text" name="cidade_id">
+                <select class="form-control" name="cidade_id" required>
+                <option value="">Selecione uma cidade</option>
+                    @foreach($cidades as $cidade)
+                        <option value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                    @endforeach
+                </select>
             </div>
             <!-- Insere div timestamp?-->
             <button type="submit" class="btn btn-success">Salvar</button>
