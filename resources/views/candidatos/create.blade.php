@@ -23,7 +23,6 @@
                 margin-bottom: 15px;
             }
 
-            title,
             h1 {
                 display: block;
                 font-weight: bold;
@@ -72,6 +71,10 @@
             <form action="{{ route('candidatos.store') }}" method="POST">
                 <!-- Token CSRF para proteção contra ataques CSRF -->
                 @csrf
+                <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input type="text" name="id" required>
+                </div>
                 <div class="form-group">
                     <label for="cpf">CPF:</label>
                     <input type="text" name="cpf" required>

@@ -27,13 +27,13 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            //'cnpj.required' => 'É necessário preencher o campo CNPJ.',
+            'cnpj.required' => 'É necessário preencher o campo CNPJ.',
             'nome.required' => 'É necessário preencher o campo nome.',
             'cidade_id.required' => 'É necessário preencher o campo cidade.'
         ];
 
         $request->validate([
-            //'cnpj' => 'required|string|max:14',
+            'cnpj' => 'required|string|max:14',
             'nome' => 'required|string|max:100',
             'cidade_id' => 'required|exists:cidade,id' , 
         ], $messages);
@@ -66,19 +66,20 @@ class EmpresaController extends Controller
     public function update(Request $request, string $id)
     {
         $messages = [
-            //'cnpj.required' => 'É necessário preencher o campo CNPJ.',
+            'cnpj.required' => 'É necessário preencher o campo CNPJ.',
             'nome.required' => 'É necessário preencher o campo nome.',
-            'cidade.required' => 'É necessário preencher o campo cidade.'
+            'cidade_id.required' => 'É necessário preencher o campo cidade.'
         ];
 
         $request->validate([
-            //'cnpj' => 'required|string|max:14',
+            'cnpj' => 'required|string|max:14',
             'nome' => 'required|string|max:100',
-            'cidade' => 'required|exists:cidade,id' , // VER COMO FICA
+            'cidade_id' => 'required|exists:cidade,id' ,
         ], $messages);
 
-        Empresa::update($request->all());
-
+        $empresa = Empresa::findOrFail($id);
+        // Atualize a cidade com os dados do request aqui
+        $empresa->update($request->all());
         // Redireciona para a rota 'empresas.index' após salvar
         return redirect()->route('empresas.index')->with('success', 'Empresa atualizada com sucesso!');
     }

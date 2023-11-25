@@ -32,6 +32,11 @@
             border-radius: 4px;
         }
 
+        h1 {
+            color: #fff;
+            font-weight: bold;
+        }
+
         .btn {
             padding: 10px 15px;
             border: none;
@@ -56,38 +61,29 @@
     </head>
 
     <body>
+    <body>
         <div class="container">
-            <h1>Editar Cadastro do Candidato</h1>
-            <form action="{{ route('candidatos.store') }}" method="POST">
+            <h1>Editar Candidato</h1>
+            <form action="{{ route('candidatos.update', $candidato->id) }}" method="POST">
                 <!-- Token CSRF para proteção contra ataques CSRF -->
                 @csrf
+                @method('PUT')
                 <div class="form-group">
-                    <label for="cpf">CPF:</label>
-                    <input type="text" name="cpf">
+                    <label for="cnpj">Nome:</label>
+                    <input type="text" name="cnpj" value="{{ $candidato->cnpj }}">
                 </div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome">
+                    <input type="text" name="nome" value="{{ $candidato->nome }}">
                 </div>
                 <div class="form-group">
-                    <label for="dataNasc">Data de Nascimento:</label>
-                    <input type="date" name="dataNasc">
+                    <label for="">:</label>
+                    <input type="text" name="" value="{{ $candidato-> }}">
                 </div>
-                <div class="form-group">
-                    <label for="telefone">Telefone:</label>
-                    <input type="text" name="telefone">
-                </div>
-                <div class="form-group">
-                    <label for="genero">Gênero:</label>
-                    <input type="text" name="genero">
-                </div>
-                <div class="form-group">
-                    <label for="cidade_id">Cidade:</label>
-                    <input type="text" name="cidade_id">
-                </div>
-                <button type="submit" class="btn btn-success">Salvar alterações</button>
-                <a href="{{ route('candidatos.index') }}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                <a href="{{ route('empresas.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
+    </body>
     </body>
 </x-app-layout>

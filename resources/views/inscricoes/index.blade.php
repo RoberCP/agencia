@@ -1,7 +1,7 @@
 <x-app-layout>
-    <link rel="stylesheet" href="{{ asset('css/inscrições/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/inscricoes/index.css') }}">
     <div class="container">
-        {{-- <h1>Lista de inscrições</h1> --}}
+        {{-- <h1>Lista de Inscrições</h1> --}}
         <br>
         <a href="{{ route('inscrições.create') }}" class="btn btn-primary">Novo Inscrições</a>
         <table class="table">
@@ -20,7 +20,7 @@
                 @foreach ($inscrições as $Inscrições)
                     <tr>
                         <td class="colunas">{{ $Inscrições->id }}</td>
-                        <td id="dataInscricao">{{ (date_format(new DateTime $Inscrições->dataInscricao), 'd/m/Y') }}</td>
+                        <td id="dataInscricao">{{ (date_format(new DateTime $inscricoes->dataInscricao), 'd/m/Y') }}</td>
                         <td class="colunas">{{ $Inscrições->statusInscricao}}</td>
                         <td>{{ $Inscrições->candidato_id }}</td>
                         <td>{{ $Inscrições->empresa_id }}</td>

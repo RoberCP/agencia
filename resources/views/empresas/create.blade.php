@@ -71,6 +71,10 @@
                 <input type="text" name="id">
             </div>
             <div class="form-group">
+    <label for="cnpj">CNPJ:</label>
+    <input type="text" name="cnpj">
+</div>
+            <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome">
             </div>

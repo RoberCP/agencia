@@ -36,12 +36,12 @@ class CandidatoController extends Controller
         ];
 
         $request->validate([
-            'cpf' => 'required|string|11',
+            'cpf' => 'required|string|max:11',
             'nome' => 'required|string|max:100',
             'dataNasc' => 'required|date', // VER COMO FICA
-            'telefone' => 'required|string|9',
+            'telefone' => 'required|string|max:9',
             'genero' => 'required|in:F,M',
-            'cidade.required' => 'required|exists:cidade,id' // VER COMO FICA
+            'cidade_id' => 'required|exists:cidade,id' // VER COMO FICA
         ], $messages);
 
         Candidato::create($request->all());
@@ -83,10 +83,10 @@ class CandidatoController extends Controller
         $request->validate([
             'cpf' => 'required|string|11',
             'nome' => 'required|string|max:100',
-            'dataNasc' => 'required|date', // VER COMO FICA
+            'dataNasc' => 'required|date', 
             'telefone' => 'required|string|9',
             'genero' => 'required|in:F,M',
-            'cidade_id' => 'required|exists:cidade,id' // VER COMO FICA
+            'cidade_id' => 'required|exists:cidade,id' 
         ], $messages);
 
         $candidato = Candidato::findOrFail($id);
