@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="candidato-details-layout">
-        <link rel="stylesheet" href="{{ asset('css/candidatos.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/details.css') }}">
         <h1>Detalhes do Candidato</h1>
         <ul>
             <li><strong>CPF:</strong> {{ $candidato->cpf }}</li>

@@ -9,10 +9,12 @@ use App\Models\Cidade;
 class CandidatoController extends Controller
 {
     // Mostra uma visão geral dos registros
-    public function index()
+    public function index(Request $request)
     {
-        // Obtém todas as Candidato do banco de dados
-        $candidatos = Candidato::all();
+        $search = $request->input('search');
+        $candidatos =  Candidato::where('nome', 'like', '%'.$search.'%')->orWhere('dataNasc', 'like', '%'.$search.'%')
+        ->paginate(10);
+
         return view('candidatos.index', compact('candidatos'));
     }
 

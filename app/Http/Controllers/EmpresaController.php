@@ -9,10 +9,12 @@ use App\Models\Cidade;
 class EmpresaController extends Controller
 {
     // Mostra uma visão geral dos registros
-    public function index()
+    public function index(Request $request)
     {
-        // Obtém todas as empresa do banco de dados
-        $empresas = Empresa::all();
+        $search = $request->input('search');
+        $empresas =  Empresa::where('nome', 'like', '%'.$search.'%')
+        ->paginate(10);
+
         return view('empresas.index', compact('empresas'));
     }
 

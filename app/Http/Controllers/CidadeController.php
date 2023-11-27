@@ -8,10 +8,13 @@ use App\Models\Cidade;
 class CidadeController extends Controller
 {
     // Mostra uma visão geral dos registros
-    public function index()
+    public function index(Request $request)
     {
-        // Obtém todas as cidade do banco de dados
-        $cidades = Cidade::all();
+        $search = $request->input('search');
+        $cidades =  Cidade::where('nome', 'like', '%'.$search.'%')
+        ->orWhere('uf', 'like', '%'.$search.'%')
+        ->paginate(10);
+
         return view('cidades.index', compact('cidades'));
     }
 
