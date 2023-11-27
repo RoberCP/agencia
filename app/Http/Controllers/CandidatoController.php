@@ -105,6 +105,6 @@ class CandidatoController extends Controller
         // Exclui a Candidato do banco de dados
         $candidato->delete();
         // Redireciona para a rota 'Candidatos.index' após salvar
-        return redirect()->route('candidatos.index')->with('success', 'Candidato excluída com sucesso!');
+        return redirect()->route('candidatos.index')->with('success', 'Candidato excluído com sucesso!');
     }
 }
