@@ -3,7 +3,7 @@
     <div class="container">
         {{-- <h1>Lista de Inscrições</h1> --}}
         <br>
-        <a href="{{ route('inscrições.create') }}" class="btn btn-primary">Novo Inscrições</a>
+        <a href="{{ route('inscricoes.create') }}" class="btn btn-primary">Novo Inscrições</a>
         <table class="table">
             <thead>
                 <tr>
@@ -17,18 +17,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($inscrições as $Inscrições)
+                @foreach ($inscricoes as $inscricao)
                     <tr>
-                        <td class="colunas">{{ $Inscrições->id }}</td>
-                        <td id="dataInscricao">{{ (date_format(new DateTime $inscricoes->dataInscricao), 'd/m/Y') }}</td>
-                        <td class="colunas">{{ $Inscrições->statusInscricao}}</td>
-                        <td>{{ $Inscrições->candidato_id }}</td>
-                        <td>{{ $Inscrições->empresa_id }}</td>
-                        <td>{{ $Inscrições->cidade_id }}</td>
+                        <td class="colunas">{{ $inscricao->id }}</td>
+                        <td>{{ $inscricao->candidato_id }}</td>
+                        <td>{{ $inscricao->empresa_id }}</td>
+                        <td>{{ $inscricao->cidade_id }}</td>
                         <td>
-                            <a href="{{ route('inscrições.show', $Inscrições->id) }}" class="btn btn-info">Detalhes</a>
-                            <a href="{{ route('inscrições.edit', $Inscrições->id) }}" class="btn btn-warning">Editar</a>
-                            <form action="{{ route('inscrições.destroy', $Inscrições->id) }}" method="POST" style="display: inline;">
+                            <a href="{{ route('inscricoes.show', $inscricoes->id) }}" class="btn btn-info">Detalhes</a>
+                            <a href="{{ route('inscricoes.edit', $inscricoes->id) }}" class="btn btn-warning">Editar</a>
+                            <form action="{{ route('inscricoes.destroy', $inscricoes->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Excluir</button>
@@ -38,7 +36,8 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $inscrições->links() }}
+        {{ $inscricoes->links() }}
     </div>
 </x-app-layout>
+
 

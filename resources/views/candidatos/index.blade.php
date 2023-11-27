@@ -10,7 +10,7 @@
                 <button type="submit" class="search-button">Pesquisar</button>
             </div>
         </form>
-        <a href="{{ route('cidades.create') }}" class="btn btn-primary">Novo Candidato</a>
+        <a href="{{ route('candidatos.create') }}" class="btn btn-primary">Novo Candidato</a>
         <table class="table">
             <thead>
                 <tr>

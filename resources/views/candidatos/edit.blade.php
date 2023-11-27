@@ -7,29 +7,47 @@
     </head>
 
     <body>
-    <body>
         <div class="container">
             <h1>Editar Candidato</h1>
             <form action="{{ route('candidatos.update', $candidato->id) }}" method="POST">
-                <!-- Token CSRF para proteção contra ataques CSRF -->
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="cnpj">Nome:</label>
-                    <input type="text" name="cnpj" value="{{ $candidato->cnpj }}">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" name="cpf" value="{{ $candidato->cpf }}">
                 </div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" value="{{ $candidato->nome }}">
                 </div>
                 <div class="form-group">
-                    <label for="">:</label>
-                    <input type="text" name="" value="{{ $candidato-> }}">
+                    <label for="dataNasc">Data de Nascimento:</label>
+                    <input type="text" name="dataNasc" value="{{ $candidato->dataNasc }}">
                 </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" name="telefone" value="{{ $candidato->telefone }}">
+                </div>
+                <div class="form-group">
+                <label for="genero">Gênero:</label>
+                <div>
+                  <input  type="radio" name="genero" value="F" required> <span class="genero">Feminino</span>
+                  <input type="radio" name="genero" value="M" required> <span class="genero">Masculino</span>
+                 </div>
+                </div>
+                <div class="form-group">
+                <label for="cidade_id">Cidade:</label>
+                <select class="form-control" name="cidade_id" required>
+                <option value="">Selecione uma cidade</option>
+                    @foreach($cidades as $cidade)
+                        <option value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
+
                 <button type="submit" class="btn btn-success">Salvar Alterações</button>
-                <a href="{{ route('empresas.index') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('candidatos.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
-    </body>
     </body>
 </x-app-layout>

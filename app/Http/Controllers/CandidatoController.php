@@ -55,19 +55,19 @@ class CandidatoController extends Controller
     public function show(string $id)
     {
         // Encontra uma Candidato no banco de dados com o ID fornecido
-        $candidatos = Candidato::findOrFail($id);
+        $candidato = Candidato::findOrFail($id);
         // Retorna a view 'Candidatos.show' e passa a Candidato como parâmetro
-        return view('candidatos.show', compact('candidatos'));
+        return view('candidatos.show', compact('candidato'));
     }
 
     // Formulário de edição de um registro
     public function edit(string $id)
     {
         // Encontra uma Candidato no banco de dados com o ID fornecido
-        $candidatos = Candidato::findOrFail($id);
+        $candidato = Candidato::findOrFail($id);
         $cidades = Cidade::all();
         // Retorna a view 'Candidatos.edit' e passa a Candidato como parâmetro
-        return view('candidatos.edit', compact('candidatos', 'cidades'));
+        return view('candidatos.edit', compact('candidato', 'cidades'));
     }
 
     // Recebe os dados do formulário de edição e atualiza no banco de dados
@@ -83,10 +83,10 @@ class CandidatoController extends Controller
         ];
 
         $request->validate([
-            'cpf' => 'required|string|11',
+            'cpf' => 'required|string|max:11',
             'nome' => 'required|string|max:100',
             'dataNasc' => 'required|date', 
-            'telefone' => 'required|string|9',
+            'telefone' => 'required|string|max:9',
             'genero' => 'required|in:F,M',
             'cidade_id' => 'required|exists:cidade,id' 
         ], $messages);

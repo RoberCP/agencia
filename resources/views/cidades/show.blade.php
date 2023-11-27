@@ -1,7 +1,14 @@
 <x-app-layout>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Editar Candidatos</title>
+        <link rel="stylesheet" href="{{ asset('css/show.css') }}">
+    </head>
+
+    <body>
     <container>
     <div class="details-layout">
-    <link rel="stylesheet" href="{{ asset('css/show.css') }}">
         <h1>Detalhes da Cidade</h1>
         <ul>
             <li><strong>ID:</strong> {{ $cidade->id }}</li>
@@ -11,4 +18,5 @@
         <button><a href="{{ route('cidades.index') }}" class="btn btn-secondary">Voltar</a></button>     
     </div>
     </container>  
+    </body>
 </x-app-layout>

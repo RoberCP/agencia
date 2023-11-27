@@ -29,13 +29,14 @@ strong {
     font-weight: bold;
 }
 
-button {
+.btn {
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-        
+}
+
+.btn-secondary {
+    background-color: #6c757d;
 }
